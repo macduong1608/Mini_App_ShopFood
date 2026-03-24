@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/page/register_page.dart';
 
 import '../widgets/button_custom.dart';
 import '../widgets/input_filed_custom.dart';
@@ -119,7 +120,14 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const RegisterPage(),
+                                ),
+                              );
+                            },
                             child: const Text(
                               "Register",
                               style: TextStyle(
