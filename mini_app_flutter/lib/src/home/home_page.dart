@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/page/login_page.dart';
 import 'package:mini_app_flutter/src/widgets/button_custom.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +75,14 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 15),
                       ButtonCustom(
                         name: 'Sign In',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
+                        },
                         color: 0xFFFF6600,
                       ),
                       const SizedBox(height: 15),
