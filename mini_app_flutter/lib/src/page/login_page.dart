@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/page/main_screen.dart';
 import 'package:mini_app_flutter/src/page/register_page.dart';
 
 import '../widgets/button_custom.dart';
@@ -101,7 +102,7 @@ class LoginPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginPage(),
+                              builder: (context) => const MainScreen(),
                             ),
                           );
                         },
