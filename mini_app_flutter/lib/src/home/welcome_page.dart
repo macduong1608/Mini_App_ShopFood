@@ -3,8 +3,8 @@ import 'package:mini_app_flutter/src/page/login_page.dart';
 import 'package:mini_app_flutter/src/page/register_page.dart';
 import 'package:mini_app_flutter/src/widgets/button_custom.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
