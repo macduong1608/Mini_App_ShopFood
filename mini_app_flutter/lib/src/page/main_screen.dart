@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/page/products_page.dart';
+import 'package:mini_app_flutter/src/widgets/home_header.dart';
 
 import 'home_page.dart';
 
@@ -14,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const Center(child: Text("Wishlist")),
+    ProductsPage(),
     const Center(child: Text("Cart")),
     const Center(child: Text("Profile")),
   ];
@@ -22,6 +24,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: homeHeader(),
+          ),
+        ),
+      ),
       body: IndexedStack(index: _selectedIndex, children: _pages),
       bottomNavigationBar: bottomBar(),
     );
@@ -29,44 +40,63 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget bottomBar() {
     return Container(
-      height: 85,
+      margin: EdgeInsets.all(20),
+      height: 70,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(35),
-          topRight: Radius.circular(35),
-        ),
+        borderRadius: BorderRadius.circular(50),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 20,
-            offset: const Offset(0, -5),
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 25,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
+
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          bottomItem(Icons.home_filled, 0),
-          bottomItem(Icons.favorite_outline, 1),
-          bottomItem(Icons.shopping_bag_outlined, 2),
-          bottomItem(Icons.person_outline, 3),
+          bottomItem(Icons.home, "HOME", 0),
+          bottomItem(Icons.search, "SEARCH", 1),
+          bottomItem(Icons.shopping_bag, "CART", 2),
+          bottomItem(Icons.person, "PROFILE", 3),
         ],
       ),
     );
   }
 
-  Widget bottomItem(IconData icon, int index) {
+  Widget bottomItem(IconData icon, String label, int index) {
     bool isSelected = _selectedIndex == index;
     return GestureDetector(
       onTap: () => setState(() => _selectedIndex = index),
-      child: Container(
-        padding: EdgeInsets.all(12),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xFFFF6600) : Colors.transparent,
-          shape: BoxShape.circle,
+          color: isSelected ? Color(0xFFFFEFE5) : Colors.transparent,
+          borderRadius: BorderRadius.circular(40),
         ),
-        child: Icon(icon, color: isSelected ? Colors.white : Colors.black54),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Color(0xFFFF6600) : Colors.grey[600],
+              size: 28,
+            ),
+            SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? const Color(0xFFFF6600) : Colors.grey[600],
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

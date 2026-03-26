@@ -18,7 +18,7 @@ class homeHeader extends StatelessWidget {
         const SizedBox(width: 16),
         Expanded(
           child: Container(
-            height: 50,
+            height: 40,
             decoration: BoxDecoration(
               color: Color(0xFFE5E2E1),
               borderRadius: BorderRadius.circular(25),
@@ -28,7 +28,7 @@ class homeHeader extends StatelessWidget {
                 hintText: 'Search fashion...',
                 prefixIcon: Icon(Icons.search, color: Color(0xFF5A4136)),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(vertical: 12),
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
               ),
             ),
           ),

@@ -12,7 +12,7 @@ Widget newArrival(BuildContext context, List<Product> products) {
       childAspectRatio: 0.7,
     ),
     itemBuilder: (context, index) {
-      return productCard(products[index]);
+      return productCard(context, products[index]);
     },
   );
 }
