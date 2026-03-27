@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/page/cart_page.dart';
 import 'package:mini_app_flutter/src/page/products_page.dart';
+import 'package:mini_app_flutter/src/page/profile_page.dart';
 import 'package:mini_app_flutter/src/widgets/home_header.dart';
 
 import 'home_page.dart';
@@ -15,10 +17,10 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomePage(),
+    HomePage(),
     ProductsPage(),
-    const Center(child: Text("Cart")),
-    const Center(child: Text("Profile")),
+    CartPage(),
+    ProfilePage(),
   ];
 
   @override
