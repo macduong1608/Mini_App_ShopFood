@@ -1,12 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/page/main_screen.dart';
 import 'package:mini_app_flutter/src/page/register_page.dart';
+import 'package:mini_app_flutter/src/services/auth_service.dart';
 
 import '../widgets/button_custom.dart';
 import '../widgets/input_filed_custom.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthService authService = AuthService();
+  bool isLoading = false;
+
+  Future<void> handleLogin() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      showSnackBar("Vui lòng nhập đầy đủ thông tin", Colors.orange);
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    final result = await authService.login(email, password);
+    if (!mounted) return;
+    setState(() {
+      isLoading = false;
+    });
+    if (result['success']) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()),
+        (route) => false,
+      );
+    } else {
+      showSnackBar(result['message'], Colors.red);
+    }
+  }
+
+  void showSnackBar(String message, Color color) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message), backgroundColor: color));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +118,13 @@ class LoginPage extends StatelessWidget {
                             inputFiledCustom(
                               "Email or Phone",
                               "Enter your email",
+                              controller: emailController,
                             ),
                             inputFiledCustom(
                               "Password",
                               "Enter your password",
                               isPassword: true,
+                              controller: passwordController,
                             ),
                             Align(
                               alignment: Alignment.centerRight,
@@ -96,18 +144,13 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      ButtonCustom(
-                        name: 'Sign In',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MainScreen(),
+                      isLoading
+                          ? CircularProgressIndicator(color: Colors.orange)
+                          : ButtonCustom(
+                              name: 'Sign in',
+                              onTap: handleLogin,
+                              color: 0xFFFF6600,
                             ),
-                          );
-                        },
-                        color: 0xFFFF6600,
-                      ),
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

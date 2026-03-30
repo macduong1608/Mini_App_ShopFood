@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-Widget inputFiledCustom(String label, String hint, {bool isPassword = false}) {
+Widget inputFiledCustom(
+  String label,
+  String hint, {
+  bool isPassword = false,
+  required TextEditingController controller,
+}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -14,6 +19,7 @@ Widget inputFiledCustom(String label, String hint, {bool isPassword = false}) {
       ),
       const SizedBox(height: 10),
       TextFormField(
+        controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(
           hintText: hint,

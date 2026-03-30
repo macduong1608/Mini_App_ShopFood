@@ -1,8 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/home/welcome_page.dart';
+import 'package:mini_app_flutter/src/services/auth_service.dart';
 import 'package:mini_app_flutter/src/widgets/button_custom.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
+
+  Future<void> handleLogout(BuildContext context) async {
+    final AuthService authService = AuthService();
+    await authService.logout();
+    if (!context.mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const WelcomePage()),
+      (route) => false,
+    );
+  }
+
+  void showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Confirm Logout"),
+        content: const Text("Are you sure you want to sign out?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              handleLogout(context);
+            },
+            child: const Text("Logout", style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +151,20 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
+            ListTile(
+              leading: Icon(Icons.logout, color: Colors.red),
+              title: Text(
+                "Logout",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                showLogoutDialog(context);
+              },
+            ),
+            SizedBox(height: 20),
           ],
         ),
       ),
