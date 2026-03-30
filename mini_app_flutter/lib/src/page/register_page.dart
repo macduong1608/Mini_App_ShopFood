@@ -1,10 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/page/login_page.dart';
+import 'package:mini_app_flutter/src/services/auth_service.dart';
 
 import '../widgets/button_custom.dart';
+import '../widgets/input_filed_custom.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
+
+  final AuthService authService = AuthService();
+
+  bool isAgree = false;
+  bool isLoading = false;
+  void showSnackBar(String message, Color color) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message), backgroundColor: color));
+  }
+
+  Future<void> handleRegister() async {
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPass = confirmPassController.text.trim();
+
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      showSnackBar("Please fill in all fields", Colors.orange);
+      return;
+    }
+
+    if (password != confirmPass) {
+      showSnackBar("Passwords do not match", Colors.red);
+      return;
+    }
+
+    if (!isAgree) {
+      showSnackBar("You must agree to the Terms of Service", Colors.orange);
+      return;
+    }
+
+    setState(() => isLoading = true);
+
+    try {
+      final result = await authService.register(
+        fullName: name,
+        email: email,
+        password: password,
+      );
+
+      if (mounted) {
+        setState(() => isLoading = false);
+
+        if (result['success'] == true) {
+          showSnackBar(
+            "Registration successful! Please sign in.",
+            Colors.green,
+          );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        } else {
+          showSnackBar(result['message'] ?? "Registration failed", Colors.red);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => isLoading = false);
+        showSnackBar("An error occurred: $e", Colors.red);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,19 +132,26 @@ class RegisterPage extends StatelessWidget {
                         width: double.infinity,
                         child: Column(
                           children: [
-                            // inputFiledCustom(
-                            //   "Full name",
-                            //   "Enter your full name",
-                            // ),
-                            // inputFiledCustom(
-                            //   "Email address",
-                            //   "Enter your email",
-                            // ),
-                            // inputFiledCustom("Password", "Enter your Password"),
-                            // inputFiledCustom(
-                            //   "Confirm password",
-                            //   "Re-enter your password",
-                            // ),
+                            inputFiledCustom(
+                              "Full name",
+                              "Enter your full name",
+                              controller: nameController,
+                            ),
+                            inputFiledCustom(
+                              "Email address",
+                              "Enter your email",
+                              controller: emailController,
+                            ),
+                            inputFiledCustom(
+                              "Password",
+                              "Enter your Password",
+                              controller: passwordController,
+                            ),
+                            inputFiledCustom(
+                              "Confirm password",
+                              "Re-enter your password",
+                              controller: confirmPassController,
+                            ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -76,8 +159,12 @@ class RegisterPage extends StatelessWidget {
                                   height: 24,
                                   width: 24,
                                   child: Checkbox(
-                                    value: false,
-                                    onChanged: (val) {},
+                                    value: isAgree,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        isAgree = val ?? false;
+                                      });
+                                    },
                                     shape: CircleBorder(),
                                     side: BorderSide(
                                       color: Color(0xFFE3BFB1),
@@ -121,11 +208,13 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      ButtonCustom(
-                        name: 'Create Account',
-                        onTap: () {},
-                        color: 0xFFFF6600,
-                      ),
+                      isLoading
+                          ? CircularProgressIndicator(color: Colors.orange)
+                          : ButtonCustom(
+                              name: 'Create Account',
+                              onTap: handleRegister,
+                              color: 0xFFFF6600,
+                            ),
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

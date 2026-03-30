@@ -42,4 +42,26 @@ class AuthService {
   Future<void> logout() async {
     await storage.deleteAll();
   }
+
+  Future<Map<String, dynamic>> register({
+    required String fullName,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _apiClient.dio.post(
+        '/auth/register',
+        data: {'fullName': fullName, 'email': email, 'password': password},
+      );
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return {'success': true, 'message': 'Registration Successful'};
+      }
+      return {'success': false, 'message': 'Registration Failed'};
+    } on DioException catch (e) {
+      String errorMessage = e.response?.data['detail'] ?? "Registration failed";
+      return {'success': false, 'message': errorMessage};
+    } catch (e) {
+      return {'success': false, 'message': 'An unexpected error occurred: $e'};
+    }
+  }
 }
