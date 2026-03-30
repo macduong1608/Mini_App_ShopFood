@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/page/login_page.dart';
 
 import '../widgets/button_custom.dart';
-import '../widgets/input_filed_custom.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -57,19 +56,19 @@ class RegisterPage extends StatelessWidget {
                         width: double.infinity,
                         child: Column(
                           children: [
-                            inputFiledCustom(
-                              "Full name",
-                              "Enter your full name",
-                            ),
-                            inputFiledCustom(
-                              "Email address",
-                              "Enter your email",
-                            ),
-                            inputFiledCustom("Password", "Enter your Password"),
-                            inputFiledCustom(
-                              "Confirm password",
-                              "Re-enter your password",
-                            ),
+                            // inputFiledCustom(
+                            //   "Full name",
+                            //   "Enter your full name",
+                            // ),
+                            // inputFiledCustom(
+                            //   "Email address",
+                            //   "Enter your email",
+                            // ),
+                            // inputFiledCustom("Password", "Enter your Password"),
+                            // inputFiledCustom(
+                            //   "Confirm password",
+                            //   "Re-enter your password",
+                            // ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
