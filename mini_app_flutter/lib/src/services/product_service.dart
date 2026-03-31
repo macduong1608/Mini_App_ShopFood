@@ -39,4 +39,36 @@ class ProductService {
       return [];
     }
   }
+
+  Future<List<Product>> getProductByCategory(
+    String categoryId, {
+    int page = 1,
+    int pageSize = 12,
+    String sort = 'newest',
+  }) async {
+    try {
+      final response = await _apiClient.dio.get(
+        "/products/category/$categoryId",
+        queryParameters: {'page': page, 'pageSize': pageSize, 'sort': sort},
+      );
+      if (response.statusCode == 200) {
+        dynamic responseData = response.data;
+        List<dynamic> listData = [];
+        if (responseData is List) {
+          listData = responseData;
+        } else if (responseData is Map && responseData['items'] != null) {
+          listData = responseData['items'];
+        } else if (responseData is Map && responseData['data'] != null) {
+          listData = responseData['data'];
+        }
+        return listData.map((json) => Product.fromJson(json)).toList();
+      } else {
+        return [];
+      }
+    } on DioException catch (e) {
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
 }

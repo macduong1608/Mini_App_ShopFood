@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../model/product_model.dart';
+import '../../page/product_detail_page.dart';
 
 Widget productCard(BuildContext context, Product product) {
   final String baseUrl = "http://192.168.86.113:5001";
@@ -9,12 +10,12 @@ Widget productCard(BuildContext context, Product product) {
       : "https://via.placeholder.com/150";
   return GestureDetector(
     onTap: () {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ProductDetailPage(product: product),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProductDetailPage(product: product),
+        ),
+      );
     },
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
