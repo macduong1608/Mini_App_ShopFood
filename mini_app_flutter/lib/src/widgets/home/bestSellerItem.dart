@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import '../../model/product_model.dart';
 
 Widget bestSellerItem(Product product) {
+  final String baseUrl = "http://192.168.86.113:5001";
+  final String imageUrl = product.mainImage != null
+      ? "$baseUrl${product.mainImage}"
+      : "https://via.placeholder.com/150";
+
   return Container(
     margin: EdgeInsets.only(bottom: 15),
     padding: EdgeInsets.all(10),
@@ -22,7 +27,7 @@ Widget bestSellerItem(Product product) {
         ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(15),
           child: Image.asset(
-            product.image,
+            imageUrl,
             width: 70,
             height: 70,
             fit: BoxFit.cover,
@@ -50,7 +55,7 @@ Widget bestSellerItem(Product product) {
                 children: [
                   const Icon(Icons.star, color: Color(0xFFFF6600), size: 14),
                   Text(
-                    " ${product.rating}",
+                    " 5.0 | Sold 99+",
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ],
@@ -61,6 +66,7 @@ Widget bestSellerItem(Product product) {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
+                  color: Color(0xFFFF6600),
                 ),
               ),
             ],

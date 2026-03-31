@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/page/cart_page.dart';
-import 'package:mini_app_flutter/src/page/products_page.dart';
 import 'package:mini_app_flutter/src/page/profile_page.dart';
 import 'package:mini_app_flutter/src/widgets/home_header.dart';
 
@@ -18,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     HomePage(),
-    ProductsPage(),
+    // ProductsPage(),
     CartPage(),
     ProfilePage(),
   ];

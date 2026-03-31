@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-Widget categoryItem(BuildContext context, String label, String imageUrl) {
+Widget categoryItem(
+  BuildContext context,
+  String label,
+  String imageUrl, {
+  bool isNetworkImage = false,
+}) {
   return Padding(
     padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
     child: InkWell(
@@ -16,7 +21,9 @@ Widget categoryItem(BuildContext context, String label, String imageUrl) {
             ),
             child: CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage(imageUrl),
+              backgroundImage: isNetworkImage
+                  ? NetworkImage(imageUrl) as ImageProvider
+                  : AssetImage(imageUrl),
             ),
           ),
           SizedBox(height: 8),
