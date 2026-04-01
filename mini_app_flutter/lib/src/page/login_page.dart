@@ -115,14 +115,14 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.infinity,
                         child: Column(
                           children: [
-                            inputFiledCustom(
-                              "Email or Phone",
-                              "Enter your email",
+                            InputFieldCustom(
+                              label: "Email or Phone",
+                              hint: "Enter your email",
                               controller: emailController,
                             ),
-                            inputFiledCustom(
-                              "Password",
-                              "Enter your password",
+                            InputFieldCustom(
+                              label: "Password",
+                              hint: "Enter your password",
                               isPassword: true,
                               controller: passwordController,
                             ),

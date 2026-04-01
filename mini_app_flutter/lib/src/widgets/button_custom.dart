@@ -36,7 +36,7 @@ class ButtonCustom extends StatelessWidget {
             name,
             style: TextStyle(
               color: isOutlined ? mainColor : Colors.white,
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),

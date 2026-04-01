@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/model/category_model.dart';
 import 'package:mini_app_flutter/src/services/category_service.dart';
 import 'package:mini_app_flutter/src/services/product_service.dart';
-import 'package:mini_app_flutter/src/widgets/home/product_card.dart';
 
 import '../model/product_model.dart';
+import '../widgets/product_card.dart';
 
 class ProductsPage extends StatefulWidget {
   ProductsPage({super.key});
@@ -107,7 +107,7 @@ class _ProductsPageState extends State<ProductsPage> {
                         ),
                         itemCount: products.length,
                         itemBuilder: (context, index) {
-                          return productCard(context, products[index]);
+                          return ProductCard(product: products[index]);
                         },
                       ),
               ),

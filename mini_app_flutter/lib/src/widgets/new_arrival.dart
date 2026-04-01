@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/services/product_service.dart';
-import 'package:mini_app_flutter/src/widgets/home/product_card.dart';
+import 'package:mini_app_flutter/src/widgets/product_card.dart';
 
-import '../../model/product_model.dart';
+import '../model/product_model.dart';
+import '../utils/app_colors.dart';
 
 class NewArrivalSection extends StatefulWidget {
   const NewArrivalSection({super.key});
@@ -14,6 +15,7 @@ class NewArrivalSection extends StatefulWidget {
 class _NewArrivalSectionState extends State<NewArrivalSection> {
   final ProductService productService = ProductService();
   late Future<List<Product>> newArrivalsFuture;
+
   @override
   void initState() {
     super.initState();
@@ -22,14 +24,14 @@ class _NewArrivalSectionState extends State<NewArrivalSection> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<List<Product>>(
       future: newArrivalsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SizedBox(
             height: 200,
             child: Center(
-              child: CircularProgressIndicator(color: Colors.orange),
+              child: CircularProgressIndicator(color: AppColors.primary),
             ),
           );
         } else if (snapshot.hasError) {
@@ -41,17 +43,17 @@ class _NewArrivalSectionState extends State<NewArrivalSection> {
         final products = snapshot.data!;
         return GridView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: products.length,
-          itemBuilder: (context, index) {
-            return productCard(context, products[index]);
-          },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 0.7,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+            childAspectRatio: 0.65,
+            crossAxisSpacing: 15,
+            mainAxisSpacing: 15,
           ),
+          itemBuilder: (context, index) {
+            return ProductCard(product: products[index]);
+          },
         );
       },
     );

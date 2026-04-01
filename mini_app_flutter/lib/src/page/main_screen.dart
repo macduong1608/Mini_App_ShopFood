@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: homeHeader(),
+            child: HomeHeader(),
           ),
         ),
       ),
