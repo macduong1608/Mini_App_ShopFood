@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-class homeHeader extends StatelessWidget {
-  const homeHeader({super.key});
+import '../utils/app_colors.dart';
+
+class HomeHeader extends StatelessWidget {
+  const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,7 @@ class homeHeader extends StatelessWidget {
         const Text(
           "SD",
           style: TextStyle(
-            color: Colors.orange,
+            color: AppColors.primary,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
@@ -20,7 +22,7 @@ class homeHeader extends StatelessWidget {
           child: Container(
             height: 40,
             decoration: BoxDecoration(
-              color: Color(0xFFE5E2E1),
+              color: AppColors.greyLight,
               borderRadius: BorderRadius.circular(25),
             ),
             child: TextFormField(
@@ -39,10 +41,10 @@ class homeHeader extends StatelessWidget {
           icon: Stack(
             clipBehavior: Clip.none,
             children: [
-              Icon(
+              const Icon(
                 Icons.shopping_bag_outlined,
                 size: 29,
-                color: Color(0xFF1C1B1B),
+                color: AppColors.secondary,
               ),
               Positioned(
                 right: -2,

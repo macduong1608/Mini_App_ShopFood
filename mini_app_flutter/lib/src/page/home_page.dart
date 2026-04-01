@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mini_app_flutter/src/widgets/home/bestSellerList.dart';
 
-import '../widgets/home/categories_list.dart';
-import '../widgets/home/new_arrival.dart';
-import '../widgets/home/section_title.dart';
+import '../utils/app_colors.dart';
+import '../widgets/bestSellerList.dart';
+import '../widgets/categories_list.dart';
+import '../widgets/new_arrival.dart';
+import '../widgets/section_title.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,48 +12,34 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F8),
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: sectionTitle("Categories", showViewAll: true),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: SectionTitle(title: "Categories", showViewAll: true),
               ),
-              categoriesList(),
-              Padding(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: sectionTitle("New Arrivals", showViewAll: false),
+              const CategoriesList(),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: SectionTitle(title: "New Arrivals", showViewAll: false),
               ),
-              Padding(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: NewArrivalSection(),
               ),
-              Padding(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: sectionTitle("Best sellers", showViewAll: false),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: SectionTitle(title: "Best Sellers", showViewAll: false),
               ),
-              Padding(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Bestsellerlist(),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

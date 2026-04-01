@@ -132,24 +132,26 @@ class _RegisterPageState extends State<RegisterPage> {
                         width: double.infinity,
                         child: Column(
                           children: [
-                            inputFiledCustom(
-                              "Full name",
-                              "Enter your full name",
+                            InputFieldCustom(
+                              label: "Full name",
+                              hint: "Enter your full name",
                               controller: nameController,
                             ),
-                            inputFiledCustom(
-                              "Email address",
-                              "Enter your email",
+                            InputFieldCustom(
+                              label: "Email address",
+                              hint: "Enter your email",
                               controller: emailController,
                             ),
-                            inputFiledCustom(
-                              "Password",
-                              "Enter your Password",
+                            InputFieldCustom(
+                              label: "Password",
+                              hint: "Enter your Password",
+                              isPassword: true,
                               controller: passwordController,
                             ),
-                            inputFiledCustom(
-                              "Confirm password",
-                              "Re-enter your password",
+                            InputFieldCustom(
+                              label: "Confirm password",
+                              hint: "Re-enter your password",
+                              isPassword: true,
                               controller: confirmPassController,
                             ),
                             Row(

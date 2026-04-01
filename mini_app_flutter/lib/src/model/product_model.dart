@@ -1,3 +1,5 @@
+import '../utils/app_constants.dart';
+
 class Product {
   final String id;
   final String name;
@@ -17,9 +19,13 @@ class Product {
     this.mainImage,
   });
 
+  String get fullImageUrl => mainImage != null
+      ? "${AppConstants.baseUrl}$mainImage"
+      : AppConstants.placeholderImage;
+
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'] ?? '',
+      id: json['_id'] ?? json['id'] ?? '',
       name: json['name'] ?? '',
       slug: json['slug'] ?? '',
       price: (json['price'] ?? 0).toDouble(),
