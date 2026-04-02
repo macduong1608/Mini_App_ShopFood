@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/widgets/button_custom.dart';
 
 import '../model/cart_model.dart';
+import '../utils/app_colors.dart';
 import 'order_success_page.dart';
 
 class CartPage extends StatefulWidget {
@@ -53,6 +54,30 @@ class _CartPageState extends State<CartPage> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu, color: Colors.grey),
+        ),
+        title: Text(
+          "SD",
+          style: TextStyle(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search, color: Colors.black, size: 28),
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),

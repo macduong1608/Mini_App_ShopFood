@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mini_app_flutter/src/page/main_screen.dart';
 import 'package:mini_app_flutter/src/widgets/button_custom.dart';
+
+import '../utils/app_colors.dart';
 
 class OrderSuccessPage extends StatelessWidget {
   const OrderSuccessPage({super.key, required this.onContinueShopping});
@@ -8,6 +11,30 @@ class OrderSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu, color: Colors.grey),
+        ),
+        title: Text(
+          "SD",
+          style: TextStyle(
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search, color: Colors.black, size: 28),
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -139,7 +166,14 @@ class OrderSuccessPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ButtonCustom(
                   name: "Continue shopping",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainScreen(),
+                      ),
+                    );
+                  },
                   color: 0xFFFF6600,
                 ),
                 SizedBox(height: 10),
