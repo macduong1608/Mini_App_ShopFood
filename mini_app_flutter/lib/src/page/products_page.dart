@@ -4,6 +4,7 @@ import 'package:mini_app_flutter/src/services/category_service.dart';
 import 'package:mini_app_flutter/src/services/product_service.dart';
 
 import '../model/product_model.dart';
+import '../widgets/home_header.dart';
 import '../widgets/product_card.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -69,6 +70,15 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: HomeHeader(),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),

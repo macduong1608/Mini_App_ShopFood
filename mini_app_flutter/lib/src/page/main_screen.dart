@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mini_app_flutter/src/page/cart_page.dart';
 import 'package:mini_app_flutter/src/page/products_page.dart';
 import 'package:mini_app_flutter/src/page/profile_page.dart';
-import 'package:mini_app_flutter/src/widgets/home_header.dart';
 
 import 'home_page.dart';
 
@@ -26,15 +25,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: HomeHeader(),
-          ),
-        ),
-      ),
       body: IndexedStack(index: _selectedIndex, children: _pages),
       bottomNavigationBar: bottomBar(),
     );
